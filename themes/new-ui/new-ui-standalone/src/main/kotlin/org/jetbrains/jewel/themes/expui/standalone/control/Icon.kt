@@ -12,6 +12,7 @@ import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.isSpecified
 import androidx.compose.ui.graphics.painter.BitmapPainter
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.graphics.takeOrElse
 import androidx.compose.ui.graphics.toolingGraphicsLayer
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
@@ -128,6 +129,9 @@ fun Icon(
     }
     val filter = colorFilter ?: run {
         val foreground = LocalAreaColors.current.foreground
+            .takeOrElse {
+                LocalAreaColors.current.text
+            }
         if (foreground.isSpecified) {
             ColorFilter.tint(foreground)
         } else {
