@@ -18,7 +18,7 @@ kotlin {
     target {
         compilations.all {
             kotlinOptions {
-                jvmTarget = "17"
+                jvmTarget = "11"
                 freeCompilerArgs = listOf("-Xopt-in=kotlin.RequiresOptIn", "-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi")
             }
         }
@@ -36,7 +36,7 @@ intellij {
     pluginName.set("Jewel")
     version.set("LATEST-EAP-SNAPSHOT")
     plugins.set(listOf("org.jetbrains.kotlin"))
-    version.set("2022.3") // IJ 22.3 RC2
+    version.set("2021.3")
 }
 
 repositories {
