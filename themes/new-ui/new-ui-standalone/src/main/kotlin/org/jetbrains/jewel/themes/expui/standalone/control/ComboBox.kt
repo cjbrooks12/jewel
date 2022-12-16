@@ -123,7 +123,7 @@ fun <T> ComboBox(
                     valueRender(value)
                 }
 
-                Icon("icons/buttonDropTriangle.svg", modifier = Modifier.align(Alignment.CenterEnd))
+                Icon("/icons/buttonDropTriangle.svg", modifier = Modifier.align(Alignment.CenterEnd))
             }
 
             DropdownMenu(menuOpened, { menuOpened = false }, modifier = menuModifier) {
