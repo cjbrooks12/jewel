@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.selection.selectable
@@ -93,26 +94,31 @@ fun Tab(
     colors.provideArea(selected) {
         val currentColors = LocalAreaColors.current
         Box(
-            modifier.areaBackground().drawWithCache {
-                onDrawWithContent {
-                    drawContent()
-                    if (selected) {
-                        val strokeWidth = 3.dp.toPx()
-                        val start = Offset(strokeWidth / 2f, size.height - strokeWidth / 2f)
-                        val end = start.copy(x = size.width - strokeWidth / 2f)
-                        drawLine(currentColors.focusColor, start, end, strokeWidth, cap = StrokeCap.Round)
+            modifier.areaBackground()
+                .height(32.dp)
+                .drawWithCache {
+                    onDrawWithContent {
+                        drawContent()
+                        if (selected) {
+                            val strokeWidth = 3.dp.toPx()
+                            val start = Offset(strokeWidth / 2f, size.height - strokeWidth / 2f)
+                            val end = start.copy(x = size.width - strokeWidth / 2f)
+                            drawLine(currentColors.focusColor, start, end, strokeWidth, cap = StrokeCap.Round)
+                        }
                     }
                 }
-            }.focusProperties {
-                canFocus = false
-            }.selectable(
-                selected = selected,
-                enabled = true,
-                onClick = onSelected,
-                role = Role.Tab,
-                interactionSource = interactionSource,
-                indication = HoverOrPressedIndication(RectangleShape)
-            ).padding(horizontal = 12.dp)
+                .focusProperties {
+                    canFocus = false
+                }
+                .selectable(
+                    selected = selected,
+                    enabled = true,
+                    onClick = onSelected,
+                    role = Role.Tab,
+                    interactionSource = interactionSource,
+                    indication = HoverOrPressedIndication(RectangleShape)
+                )
+                .padding(horizontal = 12.dp),
         ) {
             Row(modifier = Modifier.align(Alignment.Center), content = content)
         }
